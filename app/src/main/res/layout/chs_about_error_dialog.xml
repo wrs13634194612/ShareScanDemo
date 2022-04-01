@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="252dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/tip_dialog">
+
+        <ImageView
+            android:id="@+id/iv_tip_view_btn"
+            android:layout_width="92dp"
+            android:layout_height="77dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:src="@mipmap/ic_ap_failed" />
+
+        <TextView
+            android:id="@+id/tv_tip_view_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_tip_view_btn"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="分享失败"
+            android:textColor="#000000"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/tv_tip_view_btn2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_tip_view_btn"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="您共享的账号暂未注册名豆之约"
+            android:textColor="@color/collected_gray"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btn_done_tip_view_btn"
+            android:layout_width="140dp"
+            android:layout_height="44dp"
+            android:layout_below="@+id/tv_tip_view_btn2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/selector_config_net"
+            android:text="知道了"
+            android:textColor="#ffffffff"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+</RelativeLayout>
