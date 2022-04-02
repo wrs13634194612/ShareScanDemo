@@ -12,14 +12,21 @@ import android.widget.Button;
 
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ShareDeviceActivity extends Activity {
     private List<ShareBean> mDevices;
+    private List<String> dataList;
     private RecyclerView gv_devices;
     private OnlineDeviceListAdapter mAdapter;
     private CommonTitleBar commonTitleBar;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +38,7 @@ public class ShareDeviceActivity extends Activity {
         commonTitleBar = findViewById(R.id.title_activity_qr);
 
         mDevices = new ArrayList<>();
+        dataList= new ArrayList<>();
         mDevices.add(new ShareBean(1, false, "智能插座"));
         mDevices.add(new ShareBean(2, true, "易燃气体插座"));
         mDevices.add(new ShareBean(0, false, "零火线单开开关"));
@@ -39,17 +47,64 @@ public class ShareDeviceActivity extends Activity {
         gv_devices.setLayoutManager(new LinearLayoutManager(ShareDeviceActivity.this));
         gv_devices.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         gv_devices.setAdapter(mAdapter);
-//        mAdapter.setOnViewClickListener(new BaseRsecyclerViewAdapter.OnViewClickListener() {
-//            @Override
-//            public void onViewClick(View view, int position) {
-//                Log.e("TAG", view + ":onViewClick:" + position);
-//            }
-//        });
 
+        mAdapter.setOnViewClickListener(new BaseRecyclerViewAdapter.OnViewClickListener() {
+            @Override
+            public void onViewClick(View view, int position) {
+                Log.e("TAG", view+":onViewClick:" + position);
+                //选中的时候  应该改变device数据的状态并刷新
+                // 选中状态并刷新  先去把布局改一下
+                for (int i = 0; i < mDevices.size(); i++) {
+                    if (mDevices.get(position).isChecked()){
+                        mDevices.get(position).setChecked(false);
+                    }else{
+                        mDevices.get(position).setChecked(true);
+                    }
+                }
+                mAdapter.resetDevices(mDevices);
+            }
+        });
 
         btn_scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.e("TAG", "" + mDevices);
+
+
+                /**
+                 如果等于true   那么就拿出list 然后把list拼接字符串
+                 */
+
+                if (!dataList.isEmpty()){
+                    dataList.clear();
+                }
+
+                for (int i = 0; i < mDevices.size(); i++) {
+                    if (mDevices.get(i).isChecked()){
+                        dataList.add(mDevices.get(i).getName());
+                    }
+                }
+
+                String age = listToString5(dataList,',');
+                Log.e("TAG","MainActivity:"+age);
+
+
+
+
+
+//                StringBuffer buf = new StringBuffer();
+//                for (int i = 0; i < mDevices.size(); i++) {
+//                    int finalI = i;
+//                    if (mDevices.get(finalI).isChecked()){
+//                        //为真的时候  才appen数据
+//                        buf.append(mDevices.get(finalI).getName()).append(",");
+//                        if (finalI < mDevices.size() - 1) {
+//                            buf.append(",");
+//                        }
+//                    }
+//                }
+//                String name = buf.toString();
+//                Log.e("TAG", "" + name);
 
             }
         });
@@ -65,10 +120,10 @@ public class ShareDeviceActivity extends Activity {
                     @Override
                     public void onClickDialogListener(int type, boolean boolClick, String content) {
                         Log.e("TAG", "onClickDialogListener： " + type + "\t" + boolClick + "\t" + content);
-                         /**
-                          //这里应该做网络请求 直接使用go做网络请求
-                          接下来  给我找到  go的网络请求在哪里  okgo
-                          * */
+                        /**
+                         //这里应该做网络请求 直接使用go做网络请求
+                         接下来  给我找到  go的网络请求在哪里  okgo
+                         * */
 
                     }
                 });
@@ -91,5 +146,9 @@ public class ShareDeviceActivity extends Activity {
             }
         });
 
+    }
+
+    public String listToString5(List list, char separator) {
+        return  StringUtils.join(list.toArray(),separator);
     }
 }

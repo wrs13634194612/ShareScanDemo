@@ -146,10 +146,12 @@ public class ShareReceiveBean {
             }
 
             public static class DevicesBean implements Serializable {
-                public DevicesBean(String equipmentNote, String productId, String equipmentId) {
+
+                public DevicesBean(String equipmentNote, String productId, String equipmentId, boolean isOtherCheck) {
                     this.equipmentNote = equipmentNote;
                     this.productId = productId;
                     this.equipmentId = equipmentId;
+                    this.isOtherCheck = isOtherCheck;
                 }
 
                 /**
@@ -158,11 +160,18 @@ public class ShareReceiveBean {
                  * equipmentId : zcz003100192
                  */
 
-
-
                 private String equipmentNote;
                 private String productId;
                 private String equipmentId;
+                private boolean isOtherCheck;
+
+                public boolean isOtherCheck() {
+                    return isOtherCheck;
+                }
+
+                public void setOtherCheck(boolean otherCheck) {
+                    isOtherCheck = otherCheck;
+                }
 
                 public String getEquipmentNote() {
                     return equipmentNote;
@@ -271,10 +280,11 @@ public class ShareReceiveBean {
 
             public static class DevicesBeanX implements Serializable {
 
-                public DevicesBeanX(String equipmentNote, String productId, String equipmentId) {
+                public DevicesBeanX(String equipmentNote, String productId, String equipmentId, boolean ischeck) {
                     this.equipmentNote = equipmentNote;
                     this.productId = productId;
                     this.equipmentId = equipmentId;
+                    this.ischeck = ischeck;
                 }
 
                 /**
@@ -283,11 +293,18 @@ public class ShareReceiveBean {
                  * equipmentId : zcz001101027
                  */
 
-
-
                 private String equipmentNote;
                 private String productId;
                 private String equipmentId;
+                private boolean ischeck;
+
+                public boolean isIscheck() {
+                    return ischeck;
+                }
+
+                public void setIscheck(boolean ischeck) {
+                    this.ischeck = ischeck;
+                }
 
                 public String getEquipmentNote() {
                     return equipmentNote;
