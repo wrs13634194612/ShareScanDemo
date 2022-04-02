@@ -58,6 +58,9 @@ public class ShareOtherDetailActivity extends Activity {
                     Toast.makeText(ShareOtherDetailActivity.this,
                             "删除失败", Toast.LENGTH_SHORT).show();
                 }
+            }else{
+                Toast.makeText(ShareOtherDetailActivity.this,
+                        "删除失败", Toast.LENGTH_SHORT).show();
             }
             return false;
         }
@@ -199,6 +202,10 @@ public class ShareOtherDetailActivity extends Activity {
                     public void onError(com.lzy.okgo.model.Response<String> response) {
                         super.onError(response);
                         Log.e("TAG", "onError:" + response);
+                        Message msg = new Message();
+                        msg.what = 104;
+                        msg.obj = response.body();
+                        mHandler.sendMessage(msg);
                     }
                 });
     }

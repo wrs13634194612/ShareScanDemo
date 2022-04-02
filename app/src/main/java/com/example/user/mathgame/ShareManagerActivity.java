@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,9 @@ public class ShareManagerActivity extends Activity {
     private CommonTitleBar commonTitleBar;
     private LinearLayout ll_me;
     private LinearLayout ll_other;
+    private CardView cardView_me;
+    private CardView cardView_other;
+
 
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
@@ -49,6 +53,22 @@ public class ShareManagerActivity extends Activity {
                 otherList.addAll(mShareReceiveBean.getData().getOwners());
                 System.out.println(meList + "\t" + otherList);
 
+                if (meList.isEmpty()){
+                    //如果为空  cardview设置显示  否则 设置隐藏
+                    cardView_me.setVisibility(View.VISIBLE);
+                    ll_me.setVisibility(View.GONE);
+                }else{
+                    cardView_me.setVisibility(View.GONE);
+                    ll_me.setVisibility(View.VISIBLE);
+                }
+                if (otherList.isEmpty()){
+                    //如果为空  cardview设置显示  否则 设置隐藏
+                    cardView_other.setVisibility(View.VISIBLE);
+                    ll_other.setVisibility(View.GONE);
+                }else{
+                    cardView_other.setVisibility(View.GONE);
+                    ll_other.setVisibility(View.VISIBLE);
+                }
                 for (int position = 0; position < meList.size(); position++) {
                     View view = LayoutInflater.from(ShareManagerActivity.this).inflate(R.layout.item_share_manager, null);
                     TextView tv_share_number = view.findViewById(R.id.tv_share_number);
@@ -104,8 +124,10 @@ public class ShareManagerActivity extends Activity {
         setContentView(R.layout.activity_share_manager);
         ll_me = findViewById(R.id.ll_me);
         ll_other = findViewById(R.id.ll_other);
+        cardView_me = findViewById(R.id.cardView_me);
+        cardView_other = findViewById(R.id.cardView_other);
         commonTitleBar = findViewById(R.id.title_activity_qr);
-
+        getData();
         commonTitleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
             @Override
             public void onClicked(View v, int action, String extra) {
@@ -115,12 +137,6 @@ public class ShareManagerActivity extends Activity {
                 }
             }
         });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        getData();
     }
 
     private void getData() {

@@ -17,6 +17,20 @@
             android:layout_marginTop="32dp"
             android:src="@mipmap/ic_ap_failed" />
 
+
+        <EditText
+            android:id="@+id/et_dev_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:hint="请输入对方的ID或手机号"
+            android:singleLine="true"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
         <TextView
             android:id="@+id/tv_tip_view_btn"
             android:layout_width="match_parent"

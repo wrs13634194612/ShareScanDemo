@@ -47,7 +47,7 @@ public class AboutDialogErrorFragment extends DialogFragment implements DialogIn
     private void initView(View V_AboutDialog) {
         AboutSure = V_AboutDialog.findViewById(R.id.btn_done_tip_view_btn);
         final EditText et_dev_name = V_AboutDialog.findViewById(R.id.et_dev_name);
-
+        et_dev_name.setText("minApp108881");
         AboutSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

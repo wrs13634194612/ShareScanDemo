@@ -25,45 +25,126 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_below="@+id/title_activity_qr"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title_activity_qr">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="我共享的设备"
-                android:textColor="@android:color/black"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:text="我共享的设备"
+                android:textColor="@android:color/black"
                 android:textSize="18sp" />
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView_me"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@+id/title_activity_qr"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="1dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true"
+                app:contentPaddingLeft="10dp"
+                app:contentPaddingRight="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/iv_me_share_com"
+                        android:layout_width="154dp"
+                        android:layout_height="140dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="25dp"
+                        android:src="@mipmap/iv_me_share" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/iv_me_share_com"
+                        android:textSize="16sp"
+                        android:text="暂未共享设备"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
 
             <LinearLayout
                 android:id="@+id/ll_me"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:orientation="vertical"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="收到的共享设备"
-                android:textColor="@android:color/black"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:text="收到的共享设备"
+                android:textColor="@android:color/black"
                 android:textSize="18sp" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView_other"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@+id/title_activity_qr"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="1dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true"
+                app:contentPaddingLeft="10dp"
+                app:contentPaddingRight="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/iv_other_share_com"
+                        android:layout_width="154dp"
+                        android:layout_height="127dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="25dp"
+                        android:src="@mipmap/iv_other_share" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/iv_other_share_com"
+                        android:textSize="16sp"
+                        android:text="暂未共享设备"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
 
             <LinearLayout
                 android:id="@+id/ll_other"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:orientation="vertical"
+                android:visibility="gone" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
