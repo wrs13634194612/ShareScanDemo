@@ -26,11 +26,8 @@ public class ShareDeviceActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share_device);
         gv_devices = findViewById(R.id.rv_online_devices);
-        Button btn_share = findViewById(R.id.btn_share); //全选
-        Button btn_scan = findViewById(R.id.btn_scan);  //拿到全选的name数据
-        Button btn_share2 = findViewById(R.id.btn_share2);    //账号分享
-        Button btn_scan2 = findViewById(R.id.btn_scan2);         //扫码分享
-        Button btn_share3 = findViewById(R.id.btn_share3);
+        Button btn_share = findViewById(R.id.btn_share);
+        Button btn_scan = findViewById(R.id.btn_scan);
         commonTitleBar = findViewById(R.id.title_activity_qr);
 
         mDevices = new ArrayList<>();
@@ -53,62 +50,28 @@ public class ShareDeviceActivity extends Activity {
         btn_scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("TAG", "" + mDevices);
-                StringBuffer buf = new StringBuffer();
-                for (int i = 0; i < mDevices.size(); i++) {
-                    buf.append(mDevices.get(i).getName());
-                    if (i < mDevices.size() - 1) {
-                        buf.append(",");
-                    }
-                }
-                String name = buf.toString();
-                Log.e("TAG", "" + name);
+
             }
         });
         btn_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for (int i = 0; i < mDevices.size(); i++) {
-                    mDevices.get(i).setChecked(true);
-                }
-                mAdapter.notifyDataSetChanged();
-            }
-        });
-
-        btn_share2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AboutDialogFragment aboutDialog = new AboutDialogFragment();
-                aboutDialog.setName("韩红");
-                aboutDialog.show(getFragmentManager(), "AboutDialogFragment");
-                aboutDialog.onSetClickDialogListener(new AboutDialogFragment.SetOnClickDialogListener() {
-                    @Override
-                    public void onClickDoalogListener(int type, boolean boolClick) {
-                        //Log.e("TAG", "return:" + type + "==" + boolClick);
-                        //finish();  //点击了知道了  结束掉页面
-                    }
-                });
-            }
-        });
-
-        btn_share3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                // type  弹窗类型，xml页面  ，  chs_about_error_dialog
                 AboutDialogErrorFragment aboutDialog = new AboutDialogErrorFragment();
+                aboutDialog.setDialogContent(false, R.layout.fragment_item_input);
                 aboutDialog.show(getFragmentManager(), "AboutDialogFragment");
                 aboutDialog.onSetClickDialogListener(new AboutDialogErrorFragment.SetOnClickDialogListener() {
+
                     @Override
-                    public void onClickDoalogListener(int type, boolean boolClick) {
-                        //Log.e("TAG", "return:" + type + "==" + boolClick);
-                        //finish();  //点击了知道了  结束掉页面
+                    public void onClickDialogListener(int type, boolean boolClick, String content) {
+                        Log.e("TAG", "onClickDialogListener： " + type + "\t" + boolClick + "\t" + content);
+                         /**
+                          //这里应该做网络请求 直接使用go做网络请求
+                          接下来  给我找到  go的网络请求在哪里  okgo
+                          * */
+
                     }
                 });
-            }
-        });
-        btn_scan2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
             }
         });
 

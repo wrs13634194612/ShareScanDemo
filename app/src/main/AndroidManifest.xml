@@ -37,7 +37,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/MainTheme"
             android:windowSoftInputMode="adjustPan" />
-
+        <activity
+            android:name=".ShareManagerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainTheme"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>
