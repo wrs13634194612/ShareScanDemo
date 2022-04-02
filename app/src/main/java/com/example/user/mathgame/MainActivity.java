@@ -12,7 +12,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Button btn_share = findViewById(R.id.btn_share);
         Button btn_share_manager = findViewById(R.id.btn_share_manager);
 

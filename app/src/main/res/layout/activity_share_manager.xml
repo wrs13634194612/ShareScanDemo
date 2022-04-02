@@ -37,28 +37,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="我共享的设备"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="30sp" />
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:id="@+id/ll_me"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/holo_green_light"
                 android:orientation="vertical" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="收到的共享设备"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="30sp" />
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:id="@+id/ll_other"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/holo_green_light"
                 android:orientation="vertical" />
 
         </LinearLayout>

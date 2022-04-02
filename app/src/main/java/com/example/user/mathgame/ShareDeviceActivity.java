@@ -39,12 +39,12 @@ public class ShareDeviceActivity extends Activity {
         gv_devices.setLayoutManager(new LinearLayoutManager(ShareDeviceActivity.this));
         gv_devices.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         gv_devices.setAdapter(mAdapter);
-        mAdapter.setOnViewClickListener(new BaseRecyclerViewAdapter.OnViewClickListener() {
-            @Override
-            public void onViewClick(View view, int position) {
-                Log.e("TAG", view + ":onViewClick:" + position);
-            }
-        });
+//        mAdapter.setOnViewClickListener(new BaseRsecyclerViewAdapter.OnViewClickListener() {
+//            @Override
+//            public void onViewClick(View view, int position) {
+//                Log.e("TAG", view + ":onViewClick:" + position);
+//            }
+//        });
 
 
         btn_scan.setOnClickListener(new View.OnClickListener() {

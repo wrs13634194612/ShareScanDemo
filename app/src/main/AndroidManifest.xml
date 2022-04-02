@@ -38,6 +38,16 @@
             android:theme="@style/MainTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
+            android:name=".ShareMeDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ShareOtherDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".ShareManagerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MainTheme"
