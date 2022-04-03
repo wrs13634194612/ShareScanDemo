@@ -1,9 +1,14 @@
 package com.example.user.mathgame;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -53,39 +58,6 @@ public class ShareDeviceActivity extends Activity {
         }
     });
 
-    TimerTask task1 = new TimerTask() {
-        @Override
-        public void run() {
-            /***要执行的操作*/
-            AboutDialogErrorFragment aboutDialog = new AboutDialogErrorFragment();
-            aboutDialog.setDialogContent(false, R.layout.chs_about_dialog);
-            aboutDialog.show(getFragmentManager(), "AboutDialogFragment");
-            aboutDialog.onSetClickDialogListener(new AboutDialogErrorFragment.SetOnClickDialogListener() {
-
-                @Override
-                public void onClickDialogListener(int type, boolean boolClick, String content) {
-                    Log.e("TAG", "onClickDialogListener： " + type + "\t" + boolClick + "\t" + content);
-                }
-            });
-        }
-    };
-
-    TimerTask task2 = new TimerTask() {
-        @Override
-        public void run() {
-            /***要执行的操作*/
-            AboutDialogErrorFragment aboutDialog = new AboutDialogErrorFragment();
-            aboutDialog.setDialogContent(false, R.layout.chs_about_error_dialog);
-            aboutDialog.show(getFragmentManager(), "AboutDialogFragment");
-            aboutDialog.onSetClickDialogListener(new AboutDialogErrorFragment.SetOnClickDialogListener() {
-
-                @Override
-                public void onClickDialogListener(int type, boolean boolClick, String content) {
-                    Log.e("TAG", "onClickDialogListener： " + type + "\t" + boolClick + "\t" + content);
-                }
-            });
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +104,17 @@ public class ShareDeviceActivity extends Activity {
                  生成的二维码内容暂时先默认一个json 然后做加密 这个弹框还能难弄的
                  明天还剩下首页的接口修改 也简单  就这样
                  */
+                TestingDialogFragment testingDialogFragment = new TestingDialogFragment();
+                testingDialogFragment.show(getFragmentManager(), "");
+                testingDialogFragment.onSetClickDialogListener(new TestingDialogFragment.SetOnClickDialogListener() {
 
+                    @Override
+                    public void onClickDialogListener(int type, boolean boolClick, Bitmap content) {
+                        Log.e("TAG", "onClickDialogListener： " + type + "\t" + boolClick + "\t" + content);
+                        saveQRCode(content);
+                        Toast.makeText(ShareDeviceActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
         btn_share.setOnClickListener(new View.OnClickListener() {
@@ -206,6 +188,51 @@ public class ShareDeviceActivity extends Activity {
                         Log.e("TAG", "onError:" + response);
                     }
                 });
+    }
+
+
+    TimerTask task1 = new TimerTask() {
+        @Override
+        public void run() {
+            /***要执行的操作*/
+            AboutDialogErrorFragment aboutDialog = new AboutDialogErrorFragment();
+            aboutDialog.setDialogContent(false, R.layout.chs_about_dialog);
+            aboutDialog.show(getFragmentManager(), "AboutDialogFragment");
+            aboutDialog.onSetClickDialogListener(new AboutDialogErrorFragment.SetOnClickDialogListener() {
+
+                @Override
+                public void onClickDialogListener(int type, boolean boolClick, String content) {
+                    Log.e("TAG", "onClickDialogListener： " + type + "\t" + boolClick + "\t" + content);
+                }
+            });
+        }
+    };
+
+    TimerTask task2 = new TimerTask() {
+        @Override
+        public void run() {
+            /***要执行的操作*/
+            AboutDialogErrorFragment aboutDialog = new AboutDialogErrorFragment();
+            aboutDialog.setDialogContent(false, R.layout.chs_about_error_dialog);
+            aboutDialog.show(getFragmentManager(), "AboutDialogFragment");
+            aboutDialog.onSetClickDialogListener(new AboutDialogErrorFragment.SetOnClickDialogListener() {
+
+                @Override
+                public void onClickDialogListener(int type, boolean boolClick, String content) {
+                    Log.e("TAG", "onClickDialogListener： " + type + "\t" + boolClick + "\t" + content);
+                }
+            });
+        }
+    };
+
+
+    private void saveQRCode( Bitmap bitmap1) {
+        // Drawable drawable = iv_code.getDrawable();
+        MediaStore.Images.Media.insertImage(getContentResolver(), bitmap1, "", "");
+        //  sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
+        //  saveImageToGallery(CreateCodeActivity.this, qrcode, "");
+        //发送广播通知系统图库刷新数据
+        sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + Environment.getExternalStorageDirectory())));
     }
 
 }
