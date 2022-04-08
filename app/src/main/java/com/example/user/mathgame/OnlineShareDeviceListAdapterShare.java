@@ -10,33 +10,39 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+
 import java.util.List;
 
 /**
  * online devices
  * Created by Administrator on 2016/10/25.
  */
-public class ShareMeDetailAdapter extends BaseRecyclerViewAdapter<ShareMeDetailAdapter.ViewHolder> {
-    Context mContext;
-    private List<ShareReceiveBean.DataBean.GivesBean.DevicesBeanX> mDevices;
+public class OnlineShareDeviceListAdapterShare extends BaseRecyclerShareViewAdapter<OnlineShareDeviceListAdapterShare.ViewHolder> {
+    private List<Device> mDevices;
+    private Context mContext;
 
-    public ShareMeDetailAdapter(Context context, List<ShareReceiveBean.DataBean.GivesBean.DevicesBeanX> devices) {
+
+
+
+    public OnlineShareDeviceListAdapterShare(Context context, List<Device> devices) {
         mContext = context;
         mDevices = devices;
     }
 
-    public void resetDevices(List<ShareReceiveBean.DataBean.GivesBean.DevicesBeanX> devices) {
+    public void resetDevices(List<Device>devices) {
         this.mDevices = devices;
         notifyDataSetChanged();
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_online_device, null, false);
+        View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_online_share_device, null, false);
         ViewHolder holder = new ViewHolder(itemView);
         holder.tv_name = itemView.findViewById(R.id.tv_name);
         holder.img_icon = itemView.findViewById(R.id.img_icon);
         holder.cb_client = itemView.findViewById(R.id.cb_client);
+
         return holder;
     }
 
@@ -49,9 +55,10 @@ public class ShareMeDetailAdapter extends BaseRecyclerViewAdapter<ShareMeDetailA
     public void onBindViewHolder(ViewHolder holder, final int position) {
         super.onBindViewHolder(holder, position);
         holder.tv_name.setText(mDevices.get(position).getEquipmentNote());
+
         // holder.cb_client.setChecked(group.selected);
         // holder.cb_client.setEnabled(enable);
-        holder.cb_client.setChecked(mDevices.get(position).isIscheck());
+        holder.cb_client.setChecked(mDevices.get(position).isAdapterChecked());
         holder.cb_client.setEnabled(true);
         holder.cb_client.setOnClickListener(new View.OnClickListener() {
 
@@ -64,11 +71,12 @@ public class ShareMeDetailAdapter extends BaseRecyclerViewAdapter<ShareMeDetailA
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+
+
         public ImageView img_icon;
         public TextView tv_name;
         public CheckBox cb_client;
         public RelativeLayout rl_share_all;
-
         public ViewHolder(View itemView) {
             super(itemView);
         }

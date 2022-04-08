@@ -78,7 +78,13 @@ public class TestingDialogFragment extends DialogFragment {
         if (getDialog() != null && getDialog().getWindow() != null) {
             getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-            getDialog().setCanceledOnTouchOutside(true);
+            getDialog().setCanceledOnTouchOutside(false);
+            getDialog().setCancelable(false);
+
+//            dialog.setCanceledOnTouchOutside(isCancel());
+//            dialog.setCancelable(isCancel())
+
+
         }
         View mView = inflater.inflate(R.layout.dialog_test, container, false);
         tv_tip = mView.findViewById(R.id.tv_tip);
@@ -118,10 +124,9 @@ public class TestingDialogFragment extends DialogFragment {
                 Drawable drawable = iv_code.getDrawable();
                 BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
                 Bitmap bitmap1 = bitmapDrawable.getBitmap();
-
-                getDialog().cancel();
                 if (mSetOnClickListener != null) {
                     mSetOnClickListener.onClickDialogListener(0, true, bitmap1);
+                    getDialog().cancel();
                 }
             }
         });
@@ -210,5 +215,7 @@ public class TestingDialogFragment extends DialogFragment {
         bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
         return bitmap;
     }
+
+
 
 }

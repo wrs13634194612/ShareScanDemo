@@ -2,7 +2,6 @@ package com.example.user.mathgame;
 
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,20 +10,17 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,14 +28,14 @@ public class ShareOtherDetailActivity extends Activity {
     private CommonTitleBar commonTitleBar;
     private List<String> dataList;
     private List<ShareReceiveBean.DataBean.OwnersBean.DevicesBean> otherList;
-    //    private OnlineDeviceListAdapter mAdapter;
+    //    private OnlineShareDeviceListAdapterShare mAdapter;
     //    private RecyclerView rv_share_detail;
     private String name;
     private int givesId;
     private String userId;
     private String url = "https://www.mindordz.com:8181/mindor/shc/removeDeviceShare";
     private RecyclerView gv_devices;
-    private ShareOtherDetailAdapter mAdapter;
+    private ShareOtherDetailAdapterShare mAdapter;
 
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
@@ -98,7 +94,7 @@ public class ShareOtherDetailActivity extends Activity {
         givesId = getIntent().getIntExtra("givesId", -1);
 
 
-        //     mAdapter = new OnlineDeviceListAdapter(ShareMeDetailActivity.this, mDevices);
+        //     mAdapter = new OnlineShareDeviceListAdapterShare(ShareMeDetailActivity.this, mDevices);
         //            rv_share_detail.setLayoutManager(new LinearLayoutManager(ShareMeDetailActivity.this));
         //            rv_share_detail.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         //            rv_share_detail.setAdapter(mAdapter);
@@ -118,19 +114,19 @@ public class ShareOtherDetailActivity extends Activity {
          *
          * 我需要在字段里面新增一个标记的字段 用于标记数据是否被删除 默认全部为false
          */
-        //        mAdapter.setOnViewClickListener(new BaseRecyclerViewAdapter.OnViewClickListener() {
+        //        mAdapter.setOnViewClickListener(new BaseRecyclerShareViewAdapter.OnViewClickListener() {
         //            @Override
         //            public void onViewClick(View view, int position) {
         //                Log.e("TAG", view + ":onViewClick:" + position);
         //            }
         //        });
 
-        mAdapter = new ShareOtherDetailAdapter(ShareOtherDetailActivity.this, otherList);
+        mAdapter = new ShareOtherDetailAdapterShare(ShareOtherDetailActivity.this, otherList);
         gv_devices.setLayoutManager(new LinearLayoutManager(ShareOtherDetailActivity.this));
         gv_devices.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         gv_devices.setAdapter(mAdapter);
 
-        mAdapter.setOnViewClickListener(new BaseRecyclerViewAdapter.OnViewClickListener() {
+        mAdapter.setOnViewClickListener(new BaseRecyclerShareViewAdapter.OnViewClickListener() {
             @Override
             public void onViewClick(View view, int position) {
                 Log.e("TAG", view + ":onViewClick:" + position + otherList);

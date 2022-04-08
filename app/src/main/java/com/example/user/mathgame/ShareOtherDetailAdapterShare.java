@@ -17,11 +17,11 @@ import java.util.List;
  * online devices
  * Created by Administrator on 2016/10/25.
  */
-public class ShareOtherDetailAdapter extends BaseRecyclerViewAdapter<ShareOtherDetailAdapter.ViewHolder> {
+public class ShareOtherDetailAdapterShare extends BaseRecyclerShareViewAdapter<ShareOtherDetailAdapterShare.ViewHolder> {
     Context mContext;
     private List<ShareReceiveBean.DataBean.OwnersBean.DevicesBean> mDevices;
 
-    public ShareOtherDetailAdapter(Context context, List<ShareReceiveBean.DataBean.OwnersBean.DevicesBean> devices) {
+    public ShareOtherDetailAdapterShare(Context context, List<ShareReceiveBean.DataBean.OwnersBean.DevicesBean> devices) {
         mContext = context;
         mDevices = devices;
     }
@@ -33,7 +33,7 @@ public class ShareOtherDetailAdapter extends BaseRecyclerViewAdapter<ShareOtherD
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_online_device, null, false);
+        View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_online_share_device, null, false);
         ViewHolder holder = new ViewHolder(itemView);
         holder.tv_name = itemView.findViewById(R.id.tv_name);
         holder.img_icon = itemView.findViewById(R.id.img_icon);
