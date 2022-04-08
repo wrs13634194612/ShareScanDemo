@@ -4,5 +4,5 @@
     <!-- 圆角的半径 -->
     <corners android:radius="15dp" />
     <!-- 填充颜色 -->
-    <solid android:color="@color/title_color" />
+    <solid android:color="#eaeaea" />
 </shape>

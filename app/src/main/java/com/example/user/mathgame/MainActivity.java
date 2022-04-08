@@ -40,18 +40,26 @@ public class MainActivity extends AppCompatActivity {
 
     private void getData(){
         List<Device> list = new ArrayList<>();
-        Device mDevice1 = new Device();
+
+
+
+        /*Device mDevice1 = new Device();
         Device mDevice2 = new Device();
         mDevice1.setEquipmentNote("十六孔智能插座");
-        mDevice1.setProductId("zcz101");
-
-
+        mDevice1.setProductId("HPS001");
         mDevice2.setEquipmentNote("零火线插座");
-        mDevice2.setProductId("zxz102");
-
-
+        mDevice2.setProductId("zcz001");
         list.add(mDevice1);
         list.add(mDevice2);
+*/
+
+        for (int i=0;i<20;i++){
+            Device mDevice = new Device();
+            mDevice.setEquipmentNote("十六孔智能插座");
+            mDevice.setProductId("HPS001");
+            list.add(mDevice);
+        }
+
 
         Log.e("TAG",""+list);
         Intent intent = new Intent(MainActivity.this, ShareDeviceActivity.class);

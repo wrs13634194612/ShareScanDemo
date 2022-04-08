@@ -3,6 +3,7 @@ package com.example.user.mathgame;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -21,13 +23,12 @@ import java.util.List;
 public class OnlineShareDeviceListAdapterShare extends BaseRecyclerShareViewAdapter<OnlineShareDeviceListAdapterShare.ViewHolder> {
     private List<Device> mDevices;
     private Context mContext;
+    private HashMap<String,Integer> map;
 
-
-
-
-    public OnlineShareDeviceListAdapterShare(Context context, List<Device> devices) {
-        mContext = context;
-        mDevices = devices;
+    public OnlineShareDeviceListAdapterShare(Context context, List<Device> devices, HashMap<String,Integer> map) {
+        this.mContext = context;
+        this.mDevices = devices;
+        this.map = map;
     }
 
     public void resetDevices(List<Device>devices) {
@@ -42,7 +43,6 @@ public class OnlineShareDeviceListAdapterShare extends BaseRecyclerShareViewAdap
         holder.tv_name = itemView.findViewById(R.id.tv_name);
         holder.img_icon = itemView.findViewById(R.id.img_icon);
         holder.cb_client = itemView.findViewById(R.id.cb_client);
-
         return holder;
     }
 
@@ -55,10 +55,11 @@ public class OnlineShareDeviceListAdapterShare extends BaseRecyclerShareViewAdap
     public void onBindViewHolder(ViewHolder holder, final int position) {
         super.onBindViewHolder(holder, position);
         holder.tv_name.setText(mDevices.get(position).getEquipmentNote());
-
+        holder.img_icon.setImageResource(map.get(mDevices.get(position).getProductId()));
         // holder.cb_client.setChecked(group.selected);
         // holder.cb_client.setEnabled(enable);
         holder.cb_client.setChecked(mDevices.get(position).isAdapterChecked());
+        Log.e("TAG","if_adapter:"+position+"\t"+mDevices.get(position).isAdapterChecked());
         holder.cb_client.setEnabled(true);
         holder.cb_client.setOnClickListener(new View.OnClickListener() {
 

@@ -6,17 +6,17 @@
 
     <ImageView
         android:id="@+id/img_icon"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="15dp"
-        android:scaleType="fitCenter"
-        android:src="@mipmap/ic_launcher" />
+        android:scaleType="fitXY"
+        android:src="@mipmap/mindor_share_hps001_off" />
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
-        android:layout_height="80dp"
+        android:layout_height="65dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/img_icon"
@@ -30,13 +30,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
         android:layout_centerVertical="true"
-        android:layout_margin="8dp"
-        android:clickable="false"
-        android:enabled="false"
-        android:focusable="false"
-        android:scaleX="1.2"
-        android:scaleY="1.2"
-        android:theme="@style/MyCheckBox" />
+        android:button="@null"
+        android:checked="false"
+        android:drawableStart="@drawable/selector_rem_share"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:textColor="#979797"
+         />
 </RelativeLayout>
 

@@ -25,6 +25,7 @@ import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +41,6 @@ public class ShareDeviceActivity extends Activity {
     private OnlineShareDeviceListAdapterShare mAdapter;
     private CommonTitleBar commonTitleBar;
     private String url = "https://www.mindordz.com:8181/mindor/shc/createDeviceShare";
-
 
 
     private Handler mHandler = new Handler(new Handler.Callback() {
@@ -65,37 +65,6 @@ public class ShareDeviceActivity extends Activity {
     });
 
 
-
-    /**
-     var mapOff = mapOf(
-     "zcz001" to R.drawable.mindor_dev_zcz001_off,
-     "zcz002" to R.drawable.mindor_co_zcz002_off,
-     "zcz003" to R.drawable.mindor_dev_zcz003_off,
-     "zcz004" to R.drawable.mindor_dev_zcz004_off,
-     "zcz005" to R.drawable.mindor_dev_zcz003_off,
-     "zcz006" to R.drawable.mindor_dev_zcz001_off,
-     "kqy001" to R.drawable.mindor_dev_gas,
-     "BAT001" to R.drawable.mindor_dev_bat,
-     "BAT002" to R.drawable.mindor_dev_bat,
-     "BAT003" to R.drawable.mindor_dev_bat,
-     "zcq001" to R.drawable.mindor_dev_zcz001_off,
-     "swt004" to R.drawable.swtbglogo1,
-     "swt001" to R.drawable.swtbglogo1,
-     "swt002" to R.drawable.swtbglogo2,
-     "swt003" to R.drawable.swtbglogo3,
-     "SIG001" to R.drawable.sigbglogo1,
-     "SIG002" to R.drawable.sigbglogo2,
-     "SIG003" to R.drawable.sigbglogo3,
-     "HPS001" to R.drawable.mindor_dev_hps001_off,
-     "HPS002" to R.drawable.mindor_dev_hps002_off,
-     "HPS003" to R.drawable.mindor_dev_hps003_off,
-     "HPS004" to R.drawable.mindor_dev_hps004_off,
-     "HPS006" to R.drawable.mindor_dev_hps006_off,
-     "LUM001" to R.mipmap.lum001_off,
-     "GWD001" to R.drawable.gate_gate_icon
-     )
-     */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,32 +78,52 @@ public class ShareDeviceActivity extends Activity {
         dataList = new ArrayList<>();
         mDevices.addAll((ArrayList<Device>) getIntent().getSerializableExtra("list"));
         Log.e("TAG", "" + mDevices);
-        HashMap<String,Integer> map = new HashMap<>();
-        map.put("zcz101",R.drawable.ic_config_net_n);
-        map.put("zxz102",R.drawable.ic_config_net_p);
+        //sig 单火线；swt零火线；通断器；五孔插座；智能台灯
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("HPS001", R.mipmap.mindor_share_hps001_off);
+        map.put("HPS002", R.mipmap.mindor_share_hps002_off);
+        map.put("HPS003", R.mipmap.mindor_share_hps003_off);
+        map.put("HPS004", R.mipmap.mindor_share_hps004_off);
+        map.put("zcz001", R.mipmap.mindor_share_zcz001_off);
+        map.put("zcz002", R.mipmap.mindor_share_zcz002_off);
+        map.put("zcz003", R.mipmap.mindor_share_zcz003_off);
+        map.put("zcz004", R.mipmap.mindor_share_zcz004_off);
+        map.put("SIG001", R.mipmap.sigbglogo_share1);
+        map.put("SIG002", R.mipmap.sigbglogo_share2);
+        map.put("SIG003", R.mipmap.sigbglogo_share3);
+        map.put("swt001", R.mipmap.swtbglogo_share1);
+        map.put("swt002", R.mipmap.swtbglogo_share2);
+        map.put("swt003", R.mipmap.swtbglogo_share3);
+        map.put("tdq", R.mipmap.mindor_share_tdq001);
+        map.put("fiv", R.mipmap.mindor_share_fiv001);
+        map.put("LUM001", R.mipmap.lum001_share_off);
 
         //        mDevices.add(new ShareBean(1, false, "智能插座"));
         //        mDevices.add(new ShareBean(2, true, "易燃气体插座"));
         //        mDevices.add(new ShareBean(0, false, "零火线单开开关"));
 
-        mAdapter = new OnlineShareDeviceListAdapterShare(ShareDeviceActivity.this, mDevices);
-        gv_devices.setLayoutManager(new LinearLayoutManager(ShareDeviceActivity.this));
+        mAdapter = new OnlineShareDeviceListAdapterShare(ShareDeviceActivity.this, mDevices, map);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setSmoothScrollbarEnabled(true);
+        layoutManager.setAutoMeasureEnabled(true);
+        gv_devices.setLayoutManager(layoutManager);
+        gv_devices.setHasFixedSize(true);
+        gv_devices.setNestedScrollingEnabled(false);
         gv_devices.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
         gv_devices.setAdapter(mAdapter);
 
         mAdapter.setOnViewClickListener(new BaseRecyclerShareViewAdapter.OnViewClickListener() {
             @Override
             public void onViewClick(View view, int position) {
                 Log.e("TAG", view + ":onViewClick:" + position);
-                //选中的时候  应该改变device数据的状态并刷新
-                // 选中状态并刷新  先去把布局改一下
-                for (int i = 0; i < mDevices.size(); i++) {
-                    if (mDevices.get(position).isAdapterChecked()) {
-                        mDevices.get(position).setAdapterChecked(false);
-                    } else {
-                        mDevices.get(position).setAdapterChecked(true);
-                    }
+                //选中的时候  应该改变device数据的状态并刷新  选中状态并刷新  先去把布局改一下
+                if (mDevices.get(position).isAdapterChecked()) {
+                    mDevices.get(position).setAdapterChecked(false);
+                } else {
+                    mDevices.get(position).setAdapterChecked(true);
                 }
+                Log.e("TAG", "if_data:" + "\t" + mDevices.get(position).isAdapterChecked());
                 mAdapter.resetDevices(mDevices);
             }
         });
@@ -154,7 +143,7 @@ public class ShareDeviceActivity extends Activity {
                     @Override
                     public void onClickDialogListener(int type, boolean boolClick, Bitmap content) {
                         Log.e("TAG", "onClickDialogListener： " + type + "\t" + boolClick + "\t" + content);
-                        saveQRCode(ShareDeviceActivity.this,content);
+                        saveQRCode(ShareDeviceActivity.this, content);
                     }
                 });
             }
@@ -289,19 +278,20 @@ public class ShareDeviceActivity extends Activity {
             public void run() {
                 // 其次把文件插入到系统图库
                 try {
+                    //                    MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), bitmap, "IMG"+ , null));
                     MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap2,
-                            "", "");
+                            Calendar.getInstance().getTime().toString(), "");
                     ((Activity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(context, "图片保存至相册", Toast.LENGTH_SHORT).show();
                         }
                     });
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     ((Activity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, "图片保存失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "图片保存失败"+e, Toast.LENGTH_SHORT).show();
                         }
                     });
                     Log.e("TAG", "图片保存异常：" + e);
